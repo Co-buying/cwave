@@ -20,8 +20,15 @@ const Itemlist = () => {
             id: doc.id,
           };
           const excelobj = {
+            name: doc.data().name,
+            phone: doc.data().phonenumber,
+            address:doc.data().address,
             size: doc.data().size,
             count: doc.data().count,
+            accountname: doc.data().account_name,
+            accountdate: doc.data().account_date,
+            accountre:doc.data().account_re,
+
           };
           setLists((prev) => [myobj, ...prev]);
           setExcelList((prev) => [excelobj, ...prev]);
