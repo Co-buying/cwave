@@ -159,8 +159,9 @@ const Detaillist = ({ userObj }) => {
       deleteCollection2(dbService, `startlist/${id}/scrap`);
       await dbService.doc(`startlist/${id}`).delete();
       
+      await storageService.refFromURL(itemObj.attachmentUrl).delete();
     }
-    //await storageService.refFromURL(itemObj.attachmentUrl).delete();
+    
   };
 
   const qnaObj = {
