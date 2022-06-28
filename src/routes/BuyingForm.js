@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { dbService } from "../fbase";
 
 const BuyingForm = ({ userObj }) => {
   const [name, setName] = useState("");
@@ -15,11 +14,11 @@ const BuyingForm = ({ userObj }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { detailObj } = location.state; // 입력 폼 정보 받아오기
+  // const { detailObj, id } = location.state; // 입력 폼 정보 받아오기
+  const { detailObj, itemId } = location.state;
 
   const onSubmit = async (event) => {
     event.preventDefault();
-
     const BuyingObj = {
       randomidx: detailObj.randomidx,
       name: name,
@@ -36,7 +35,6 @@ const BuyingForm = ({ userObj }) => {
       deleted: false,
     };
 
-    await dbService.collection("joinlist").add(BuyingObj);
     setName("");
     setPhonenumber("");
     setCount("");
@@ -45,14 +43,17 @@ const BuyingForm = ({ userObj }) => {
     setAccount_name("");
     setAccount_date("");
     setAccount_re("");
+
     navigate("/buying/done", {
       replace: false,
       state: { link: detailObj.link },
     });
   };
 
-  const onCancel = () => {
-    navigate("/selling/detail", {
+  const onCancel = (event) => {
+    console.log(detailObj);
+    event.preventDefault();
+    navigate(`/selling/detail/${itemId}`, {
       replace: false,
       state: { detailObj: detailObj },
     });
@@ -82,7 +83,7 @@ const BuyingForm = ({ userObj }) => {
   };
 
   return (
-    <form className="openjoin_container" onSubmit={onSubmit}>
+    <form className="openjoin_container">
       <p>공구 참여하기</p>
       <p className="openjoin_que">
         <span>✔️ 이름: </span>
@@ -185,7 +186,7 @@ const BuyingForm = ({ userObj }) => {
         <button className="default_Btn_Right" onClick={onCancel}>
           취소
         </button>
-        <button className="default_Btn_Right" type="submit">
+        <button className="default_Btn_Right" type="submit" onClick={onSubmit}>
           제출
         </button>
       </div>
