@@ -160,23 +160,21 @@ const SellingForm = ({ userObj }) => {
           value={link}
           onChange={onChange}
           type="text"
-          placeholder="오픈채팅방링크"
+          placeholder="오픈채팅방 링크"
           maxLength={150}
           style={{ marginBottom: 5 }}
         />
       </p>
 
       <p className="openjoin_que">
-        <span className="openjoin_long">
-          ✔️ 계좌(은행/ 계좌번호/입금주명):{" "}
-        </span>
+        <span className="openjoin_long">✔️ 계좌(은행/계좌번호/입금주명): </span>
         <input
           id="account"
           className="openjoin_input"
           value={account}
           onChange={onChange}
           type="text"
-          placeholder="계좌(은행/ 계좌번호/입금주명)"
+          placeholder="계좌(은행/계좌번호/입금주명)"
           maxLength={120}
           style={{ marginBottom: 5 }}
           required
@@ -212,7 +210,7 @@ const SellingForm = ({ userObj }) => {
           value={etc}
           onChange={onChange}
           type="text"
-          placeholder="최대 길이는 1000자입니다."
+          placeholder="기타사항"
           maxLength={10000}
         />
       </p>
