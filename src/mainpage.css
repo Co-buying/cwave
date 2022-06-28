@@ -22,4 +22,10 @@
 }
 .name {
   font-size: small;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 140px;
+  height: 20px;
 }
