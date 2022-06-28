@@ -2,35 +2,40 @@ import { useNavigate, useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import { dbService, storageService } from "../fbase";
 import { v4 as uuidv4 } from "uuid";
-const EditForm = ({ itemObj, userObj, itemId }) => {
-  let navigate = useNavigate();
-  const location = useLocation();
-  itemObj = location.state.itemObj;
-  itemId = location.state.itemId;
-  const [editing, setEditing] = useState(false);
-  const [itemname, setItemname] = useState(itemObj.itemname);
-  const [item, setItem] = useState(itemObj.item);
-  const [price, setPrice] = useState(itemObj.price);
-  const [deadline, setDeadline] = useState(itemObj.deadline);
-  const [etc, setEtc] = useState(itemObj.etc);
-  const [account, setAccount] = useState(itemObj.account);
-  const [link, setLink] = useState(itemObj.link);
-  const [attachment, setAttachment] = useState(itemObj.attachmentUrl);
-  const toggleEditing = () => setEditing((prev) => !prev);
-  const [newattachment, setNewAttachment] = useState("");
-  const onCancel = () => {
-    navigate(`/selling/detail/${itemId}`);
-  };
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    toggleEditing();
-    let attachmentUrl = "";
-    if (newattachment !== "") {
-      const attachmentRef = storageService
-        .ref()
-        .child(`${userObj.uid}/${uuidv4()}`);
-      const response = await attachmentRef.putString(newattachment, "data_url");
-      attachmentUrl = await response.ref.getDownloadURL();
+
+const EditForm=({itemObj, userObj, itemId})=>{
+    let navigate = useNavigate();
+    const location=useLocation();
+    itemObj = location.state.itemObj;
+    itemId=location.state.itemId;
+    const [editing, setEditing] = useState(false);
+    const [itemname, setItemname] = useState(itemObj.itemname);
+    const [item, setItem] = useState(itemObj.item);
+    const [price, setPrice] = useState(itemObj.price);
+    const [deadline, setDeadline] = useState(itemObj.deadline);
+    const [etc, setEtc] = useState(itemObj.etc);
+    const [account, setAccount] = useState(itemObj.account);
+    const [link, setLink] = useState(itemObj.link);
+    const [attachment, setAttachment] = useState(itemObj.attachmentUrl);
+    const toggleEditing = () => setEditing((prev) => !prev);
+    const [newattachment, setNewAttachment] = useState("");
+    const onCancel=()=>{
+      navigate(`/selling/detail/${itemId}`);
+    }
+    const onSubmit = async (event) => {
+      event.preventDefault();
+      toggleEditing();
+      let attachmentUrl = "";
+      if (newattachment !== "") {
+        const attachmentRef = storageService
+          .ref()
+          .child(`${userObj.uid}/${uuidv4()}`);
+        const response = await attachmentRef.putString(newattachment, "data_url");
+        attachmentUrl = await response.ref.getDownloadURL();
+        await dbService.doc(`startlist/${itemId}`).update({
+          attachmentUrl,
+        });
+      }
       await dbService.doc(`startlist/${itemId}`).update({
         attachmentUrl,
       });

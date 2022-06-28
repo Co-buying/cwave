@@ -83,20 +83,37 @@ const Detaillist = ({ userObj }) => {
     });
   };
 
+
+  const [qnaobjlists,setQnaobjlists] = useState([]);
+  useEffect (()=> { dbService
+    .collection("startlist")
+    .doc(id)
+    .collection("QnA")
+    .onSnapshot((snapshot) => {
+      const listArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setQnaobjlists(listArray);
+    });
+  },[]);
+
   // Delete Cobuying Item
   const onDeleteClick = async () => {
     const ok = window.confirm("정말 공구를 삭제하실 건가요?");
     if (ok) {
       navigate("/");
+      
       async function deleteCollection(dbService, collectionPath) {
         const collectionRef = dbService.collection(collectionPath);
         const query = collectionRef;
+
         //debugger
         return new Promise((resolve, reject) => {
           deleteQueryBatch(dbService, query, resolve).catch(reject);
         });
       }
-
+      
       async function deleteCollection2(dbService, collectionPath) {
         const collectionRef = dbService.collection(collectionPath);
         const query = collectionRef;
@@ -125,32 +142,26 @@ const Detaillist = ({ userObj }) => {
 
         // Recurse on the next process tick, to avoid
         // exploding the stack.
+        /*
         process.nextTick(() => {
           deleteQueryBatch(dbService, query, resolve);
         });
-      }
+        */
+      } 
 
-      //await dbService.doc(`startlist/${id}`).delete();
-      deleteCollection(
-        dbService,
-        `startlist/${id}/QnA/${qnaObj.creatorId}/comments`
-      );
-      await dbService
-        .doc(`startlist/${id}`)
-        .collection("QnA")
-        .doc(`${qnaObj.creatorId}`)
-        .delete();
+      for(let i=0; i<qnaobjlists.length; i++){
+        deleteCollection(dbService, `startlist/${id}/QnA/${qnaobjlists[i].id}/comments`)
+      }
 
       deleteCollection2(dbService, `startlist/${id}/QnA`);
       await dbService.doc(`startlist/${id}`).delete();
 
       deleteCollection2(dbService, `startlist/${id}/scrap`);
       await dbService.doc(`startlist/${id}`).delete();
+      
     }
     //await storageService.refFromURL(itemObj.attachmentUrl).delete();
   };
-
-  // Edit Cobuying Item
 
   const qnaObj = {
     text: qna,
