@@ -10,7 +10,8 @@ const MyQnA = ({ listObj, userObj }) => {
   useEffect(() => {
     dbService
       .doc(`startlist/${listObj.id}`)
-      .collection("QnA").orderBy('createdAt')
+      .collection("QnA")
+      .orderBy("createdAt")
       .onSnapshot((snapshot) => {
         const checkArray = snapshot.docs.map((doc) => ({
           id: userObj.uid,

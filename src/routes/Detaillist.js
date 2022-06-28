@@ -1,7 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { dbService, storageService } from "../fbase";
-import { v4 as uuidv4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrash,
@@ -74,7 +73,10 @@ const Detaillist = ({ userObj }) => {
   const [bucket, setBucket] = useState(false);
 
   const onJoinlistClick = () => {
-    navigate("/buying", { replace: false, state: { detailObj: detailObj } });
+    navigate("/buying", {
+      replace: false,
+      state: { detailObj: detailObj, itemId: id },
+    });
   };
   const onShowlistClick = () => {
     navigate("/itemlist", {
@@ -83,27 +85,27 @@ const Detaillist = ({ userObj }) => {
     });
   };
 
-
-  const [qnaobjlists,setQnaobjlists] = useState([]);
-  useEffect (()=> { dbService
-    .collection("startlist")
-    .doc(id)
-    .collection("QnA")
-    .onSnapshot((snapshot) => {
-      const listArray = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setQnaobjlists(listArray);
-    });
-  },[]);
+  const [qnaobjlists, setQnaobjlists] = useState([]);
+  useEffect(() => {
+    dbService
+      .collection("startlist")
+      .doc(id)
+      .collection("QnA")
+      .onSnapshot((snapshot) => {
+        const listArray = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setQnaobjlists(listArray);
+      });
+  }, []);
 
   // Delete Cobuying Item
   const onDeleteClick = async () => {
     const ok = window.confirm("정말 공구를 삭제하실 건가요?");
     if (ok) {
       navigate("/");
-      
+
       async function deleteCollection(dbService, collectionPath) {
         const collectionRef = dbService.collection(collectionPath);
         const query = collectionRef;
@@ -113,7 +115,7 @@ const Detaillist = ({ userObj }) => {
           deleteQueryBatch(dbService, query, resolve).catch(reject);
         });
       }
-      
+
       async function deleteCollection2(dbService, collectionPath) {
         const collectionRef = dbService.collection(collectionPath);
         const query = collectionRef;
@@ -147,10 +149,13 @@ const Detaillist = ({ userObj }) => {
           deleteQueryBatch(dbService, query, resolve);
         });
         */
-      } 
+      }
 
-      for(let i=0; i<qnaobjlists.length; i++){
-        deleteCollection(dbService, `startlist/${id}/QnA/${qnaobjlists[i].id}/comments`)
+      for (let i = 0; i < qnaobjlists.length; i++) {
+        deleteCollection(
+          dbService,
+          `startlist/${id}/QnA/${qnaobjlists[i].id}/comments`
+        );
       }
 
       deleteCollection2(dbService, `startlist/${id}/QnA`);
@@ -158,10 +163,9 @@ const Detaillist = ({ userObj }) => {
 
       deleteCollection2(dbService, `startlist/${id}/scrap`);
       await dbService.doc(`startlist/${id}`).delete();
-      
+
       await storageService.refFromURL(itemObj.attachmentUrl).delete();
     }
-    
   };
 
   const qnaObj = {

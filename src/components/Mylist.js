@@ -19,12 +19,12 @@ const Mylist = ({ listObj, isOwner, creatorId }) => {
   return (
     <>
       <div className="Itemclass">
-          <span className="myitem" onClick={onShowdetailClick}>
-            {`${listObj.itemname}`}
-          </span>
-          <span className="myitemshow" onClick={onShowlist}>
-              참여자 목록 보기
-          </span>
+        <span className="myitem" onClick={onShowdetailClick}>
+          {`${listObj.itemname}`}
+        </span>
+        <span className="myitemshow" onClick={onShowlist}>
+          참여자 목록 보기
+        </span>
       </div>
     </>
   );
