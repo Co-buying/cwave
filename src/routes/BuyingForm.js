@@ -33,7 +33,7 @@ const BuyingForm = ({ userObj }) => {
       account_name: account_name,
       account_re: account_re,
       deposit_complete: false,
-      deleted : false,
+      deleted: false,
     };
 
     await dbService.collection("joinlist").add(BuyingObj);
@@ -45,7 +45,10 @@ const BuyingForm = ({ userObj }) => {
     setAccount_name("");
     setAccount_date("");
     setAccount_re("");
-    navigate("/buying/done", { replace: false, state: { link: detailObj.link } });
+    navigate("/buying/done", {
+      replace: false,
+      state: { link: detailObj.link },
+    });
   };
 
   const onCancel = () => {
@@ -87,7 +90,7 @@ const BuyingForm = ({ userObj }) => {
           className="openjoin_input"
           id="nameform"
           type="text"
-          placeholder="Write name"
+          placeholder="이름"
           onChange={onChange}
           value={name}
           required
@@ -99,7 +102,7 @@ const BuyingForm = ({ userObj }) => {
           className="openjoin_input"
           id="phonenumberform"
           type="tel"
-          placeholder="Write phone number"
+          placeholder="전화번호"
           onChange={onChange}
           value={phonenumber}
           required
@@ -111,7 +114,7 @@ const BuyingForm = ({ userObj }) => {
           className="openjoin_input"
           id="countform"
           type="number"
-          placeholder="수량을 입력하세요"
+          placeholder="수량"
           onChange={onChange}
           value={count}
           required
@@ -123,7 +126,7 @@ const BuyingForm = ({ userObj }) => {
           className="openjoin_input"
           id="sizeform"
           type="text"
-          placeholder="사이즈를 입력하세요"
+          placeholder="사이즈"
           onChange={onChange}
           value={size}
           required
@@ -135,7 +138,7 @@ const BuyingForm = ({ userObj }) => {
           className="openjoin_input"
           id="addressform"
           type="text"
-          placeholder="배송을 원하시면 주소를 입력해주세요"
+          placeholder="배송 원하는 경우 주소 입력"
           onChange={onChange}
           value={address}
         />
@@ -146,7 +149,7 @@ const BuyingForm = ({ userObj }) => {
           className="openjoin_input"
           id="accountnameform"
           type="text"
-          placeholder="입금자명을 입력해주세요"
+          placeholder="입금자명"
           onChange={onChange}
           value={account_name}
           required
@@ -158,7 +161,7 @@ const BuyingForm = ({ userObj }) => {
           className="openjoin_input"
           id="accountdateform"
           type="date"
-          placeholder="입금일자를 입력해주세요"
+          placeholder="입금일자"
           onChange={onChange}
           value={account_date}
           required
@@ -172,7 +175,7 @@ const BuyingForm = ({ userObj }) => {
           className="openjoin_input"
           id="accountreform"
           type="text"
-          placeholder="환불계좌(은행/계좌번호/입금주명)을 입력해주세요"
+          placeholder="환불계좌(은행/계좌번호/입금주명)"
           onChange={onChange}
           value={account_re}
           required
