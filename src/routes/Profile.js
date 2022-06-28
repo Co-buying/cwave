@@ -63,7 +63,7 @@ const Profile = ({ userObj, listObj, refreshUser }) => {
         await dbService.doc(`user/${userObj.uid}`).update({
           displayName: newDisplayName,
         });
-        alert("닉네임 변경완료!");
+        alert("닉네임 변경 완료되었습니다.");
       }
       else{
         if (newDisplayName.length != 0)
