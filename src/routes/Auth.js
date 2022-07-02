@@ -9,8 +9,6 @@ const Auth = ({userObj}) => {
     let provider;
     provider = new firebaseInstance.auth.GoogleAuthProvider();
     await authService.signInWithPopup(provider);
-    /*await dbService.collection("user").add(userObj);
-    console.log(userObj);*/
   };
   return (
     <div className="formbox" onClick={onSocialClick}>

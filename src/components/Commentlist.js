@@ -30,12 +30,12 @@ export default function Commentlist({
           <>
               <div className="comment_retext">
               <img  width="12%" src="img/chong.png"></img>
-                <b>총대</b>{' '}{commentObj.text}        
+                <b className="chong_font">총대</b>{' '}{commentObj.text}        
               </div>
              
                 {isOwner && (
               <span className="comment_trashbtn" onClick={onCommentDeleteClick}>
-              <FontAwesomeIcon icon={faTrash} color={"#4B59A8"} />
+              <FontAwesomeIcon icon={faTrash} color={"#bbdcf7"} />
             </span>)
             }
           </>
@@ -48,7 +48,7 @@ export default function Commentlist({
         </div>
         {isOwner && (
             <span className="comment_trashbtn" onClick={onCommentDeleteClick}>
-            <FontAwesomeIcon icon={faTrash} color={"#4B59A8"} />
+            <FontAwesomeIcon icon={faTrash} color={"#bbdcf7"} />
           </span>)
           }
         </>

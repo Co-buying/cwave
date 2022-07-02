@@ -277,7 +277,7 @@ const Detaillist = ({ userObj }) => {
       {isLodded ? (
         <div className="detaillist_content">
           <div>
-            <h2 align="center">{itemObj.itemname}</h2>
+            <h2 align="center"><b>{itemObj.itemname}</b></h2>
 
             {itemObj.attachmentUrl && (
               <img src={itemObj.attachmentUrl} className="detaillist_img" />
