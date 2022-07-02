@@ -54,15 +54,16 @@ export default function QnA({ qnaObj, isOwner, userObj, detailObj, bucket,isOpen
   return (
     <>
       <div className="detaillist_qna_box">
-        <span className="detaillist_qnacontent">
+        <div className="detaillist_qnacontent">
           <img width="8%" src="img/noonsong.gif"></img>
           <b>{qnaObj.userName}</b> &nbsp; {qnaObj.text}
-        </span>
-        {isOwner && (
+          {isOwner && (
         <span className="detaillist_trashbtn" onClick={onQnADeleteClick}>
-          <FontAwesomeIcon icon={faTrash} color={"#4B59A8"} />
+          <FontAwesomeIcon icon={faTrash} color={"#bbdcf7"} />
         </span>
-        )}          
+        )}  
+        </div>
+                
       </div>
         <Comment userObj={userObj} qnaObj={qnaObj} detailObj={detailObj} isOpener={isOpener} />
     </>
