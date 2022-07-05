@@ -104,7 +104,7 @@ const BuyingForm = ({ userObj }) => {
           className="openjoin_input"
           id="phonenumberform"
           type="tel"
-          placeholder="전화번호"
+          placeholder="000-0000-0000"
           onChange={onChange}
           value={phonenumber}
           required
@@ -140,7 +140,7 @@ const BuyingForm = ({ userObj }) => {
           className="openjoin_input"
           id="addressform"
           type="text"
-          placeholder="배송 원하는 경우 주소 입력"
+          placeholder="상세주소로 입력(동/호수까지)"
           onChange={onChange}
           value={address}
         />
