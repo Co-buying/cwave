@@ -89,6 +89,20 @@ const EditForm = ({ itemObj, userObj, itemId }) => {
     };
     reader.readAsDataURL(theFile);
   };
+
+  const onKeyUp = (event) => {
+    const {
+      target: { value },
+    } = event;
+    var content = value;
+    //  document.getElementById('countspan').html(content.length);
+    document.getElementById('countspan').innerHTML = content.length;
+
+    if (content.length > 300) {
+      alert("최대 300자까지 입력 가능합니다.");
+    }
+  }
+
   return (
     <>
       <form className="openjoin_container">
@@ -207,31 +221,39 @@ const EditForm = ({ itemObj, userObj, itemId }) => {
           )}
         </p>
         {itemObj.etc == "" ? (
-          <p className="openjoin_que">
-            <span className="openjoin_long">✔️ 기타사항 : </span>
-            <textarea
-              id="etc"
-              className="openjoin_input"
-              value={etc}
-              onChange={onChange}
-              type="text"
-              placeholder="기타사항"
-              maxLength={10000}
-            />{" "}
-          </p>
+          <div className="text_box">
+            <p className="openjoin_que">
+              <span className="openjoin_long">✔️ 구체사항 : </span>
+              <textarea
+                id="etc"
+                className="openjoin_input"
+                value={etc}
+                onChange={onChange}
+                onKeyUp={onKeyUp}
+                type="text"
+                placeholder="구체사항을 작성해주세요"
+                maxLength={300}
+              />
+              <div className="count"><span id="countspan">0</span>/300</div>
+            </p>
+          </div>
         ) : (
-          <p className="openjoin_que">
-            <span className="openjoin_long">✔️ 기타사항 : </span>
-            <textarea
-              id="etc"
-              className="openjoin_input"
-              value={etc}
-              onChange={onChange}
-              type="text"
-              placeholder={itemObj.etc}
-              maxLength={120}
-            />{" "}
-          </p>
+          <div className="text_box">
+            <p className="openjoin_que">
+              <span className="openjoin_long">✔️ 구체사항 : </span>
+              <textarea
+                id="etc"
+                className="openjoin_input"
+                value={etc}
+                onChange={onChange}
+                onKeyUp={onKeyUp}
+                type="text"
+                placeholder={itemObj.etc}
+                maxLength={300}
+              />
+              <div className="count"><span id="countspan">0</span>/300</div>
+            </p>
+          </div>
         )}
         <br />
         <br />

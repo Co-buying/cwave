@@ -217,7 +217,7 @@ const SellingForm = ({ userObj }) => {
 
       <div className="text_box">
         <p className="openjoin_que">
-          <span className="openjoin_long">✔️ 기타사항 : </span>
+          <span className="openjoin_long">✔️ 구체사항 : </span>
           <textarea
             id="etc"
             className="openjoin_input"
@@ -225,7 +225,7 @@ const SellingForm = ({ userObj }) => {
             onChange={onChange}
             onKeyUp={onKeyUp}
             type="text"
-            placeholder="기타사항을 작성해주세요"
+            placeholder="구체사항을 작성해주세요"
             maxLength={300}
           />
           <div className="count"><span id="countspan">0</span>/300</div>

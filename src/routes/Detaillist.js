@@ -310,7 +310,7 @@ const Detaillist = ({ userObj }) => {
                 <br></br>
                 <b>✔️ 계좌</b> &nbsp;&nbsp;&nbsp;{itemObj.account}
                 <br></br>
-                <b>✔️ 기타사항</b> <br></br>
+                <b>✔️ 구체사항</b> <br></br>
                 <div
                   className="need_enter"
                   style={{ paddingLeft: "3%", paddingRight: "3%" }}
