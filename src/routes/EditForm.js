@@ -36,9 +36,6 @@ const EditForm = ({ itemObj, userObj, itemId }) => {
         attachmentUrl,
       });
     }
-    await dbService.doc(`startlist/${itemId}`).update({
-      attachmentUrl,
-    });
 
     await dbService.doc(`startlist/${itemId}`).update({
       itemname: itemname,
