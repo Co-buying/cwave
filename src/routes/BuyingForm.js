@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { dbService } from "../fbase";
 
 const BuyingForm = ({ userObj }) => {
   const [name, setName] = useState("");
@@ -34,7 +35,7 @@ const BuyingForm = ({ userObj }) => {
       deposit_complete: false,
       deleted: false,
     };
-
+    await dbService.collection("joinlist").add(BuyingObj);
     setName("");
     setPhonenumber("");
     setCount("");

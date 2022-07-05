@@ -23,7 +23,7 @@ const Myjoinlist = ({ listObj, isOwner }) => {
               ...doc.data(),
             };
             setExist(true);
-            setName(myObj.name);
+            setName(myObj.itemname);
           }
         });
       });
@@ -64,7 +64,7 @@ const Myjoinlist = ({ listObj, isOwner }) => {
               {`${name}`}
             </span>
             <span className="myformshow" onClick={onShowbuyClick}>
-              제출 폼 확인
+              제출 확인
             </span>
             <span className="myitemOka">
               오카방

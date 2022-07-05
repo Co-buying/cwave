@@ -210,7 +210,12 @@ const EditForm = ({ itemObj, userObj, itemId }) => {
             accept="image/*"
             onChange={onFileChange}
           />
-          {attachment && (
+          {newattachment ? (
+            <div className="attatchment">
+              <img src={newattachment} />
+              <button onClick={onClearAttachment}>Clear</button>
+            </div>
+          ):(
             <div className="attatchment">
               <img src={attachment} />
               <button onClick={onClearAttachment}>Clear</button>
