@@ -151,7 +151,7 @@ const CobuyingItem = ({ userObj, listObj, isOwner }) => {
                   />
                 </>
               )}
-              <div className="name">상품명: {listObj.itemname}</div>
+              <div className="name" style={{fontWeight:'bolder'}}>{listObj.itemname}</div>
               <div className="name">분류: {listObj.item}</div>
               <div className="deadline">{`${listObj.deadline}까지`}</div>
             </div>
